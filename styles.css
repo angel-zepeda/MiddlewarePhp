@@ -1,0 +1,90 @@
+.chat-client {
+  width: 30%;
+  height: 430px;
+  border: 1px solid gray;
+  border-radius: 2%;
+  padding: 0;
+  box-shadow: 1px 1px 3px #888888;
+}
+.chat-header {
+  width: 100%;
+  height: 40px;  
+  background: blue;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2% 2% 0 0;
+}
+
+.chat-header p {
+  margin: 0;
+}
+
+.chat-box {
+  width: 95%;
+  height: 74%;
+  background: #fff;
+  padding: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 0.9em;
+}
+
+.input-chat {
+  width: 75%;
+  border-radius: 1%;
+  font-size: 1em;
+  border: 1px solid gray;
+  padding: 10px;
+  font-size: 0.9em;
+  float: left;
+}
+
+.btn-send {
+  background: blue;
+  width: 20%;
+  color: white;
+  font-size: 1em;
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.user-chat {
+  width: 80%;
+  background: gray;
+  padding: 10px;
+  float: right;
+  text-align: right;
+  margin: 0;
+  color: #fff;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.bot-chat {
+  width: 80%;
+  padding: 10px;
+  float: left;
+  margin: 0;
+  background: SteelBlue;
+  border-radius: 50px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.btn-close-chat {
+  border-radius: 50%;
+  color: #fff;
+  padding: 20px;
+  background: blue;
+  border: none;
+  margin: 10px;
+  font-size: 1.5em;
+}
+
+.btn-open-chat {
+
+  
+}
