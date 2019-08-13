@@ -12,7 +12,7 @@
     function detect_intent_texts($projectId, $text, $sessionId, $languageCode = 'es-ES') {
 
         /* NEW CLIENT */
-        $test = array('credentials' => 'credentials.json');
+        $test = array('credentials' => './credentials/mainBot.json');
         $sessionsClient = new SessionsClient($test);
         $session = $sessionsClient->sessionName($projectId, $sessionId);
         // printf('Session path: %s' . PHP_EOL, $session);

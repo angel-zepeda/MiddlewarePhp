@@ -41,12 +41,12 @@
         this.replaceWhiteSpace(input);        
       }
 
-      replaceWhiteSpace = (string) => {
+      replaceWhiteSpace = string => {
         const query = string.replace(/\s/g, "+");
         this.getResponse(query);
       }
 
-      getResponse = async (query) => {
+      getResponse = async query => {
         // const URL = `${this.state.urlRoot}/projects/${this.state.projectId}/agent/sessions/${this.state.sessionId}:detectIntent`;
         let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
         let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}`);
@@ -60,14 +60,13 @@
         if (chat) chat.scrollTop = chat.scrollHeight;  
       }
 
-      render() {
-        
+      render() {        
         if (this.state.show) {          
           return (
             <div> 
                 <div className="chat-client">
                   <div className="chat-header"> 
-                    <p> CHAT BOT</p>
+                    <p>CHAT BOT</p>
                   </div>
                     <div className="chat-box" id="chatBox">
                     {this.state.msg.map(msg => (
@@ -110,13 +109,11 @@
               onClick={this.toggleChat}
               className="btn-open-chat"
             />
-          )
-          
-        }
-       
+          )       
+        } 
       }
-    }     
-     ReactDOM.render(<App />,document.getElementById("root") );
+    }
+     ReactDOM.render(<App />,document.getElementById("root"));
     </script>
   </body>
 </html>
