@@ -109,7 +109,7 @@
               onClick={this.toggleChat}
               className="btn-open-chat"
             />
-          )       
+          )
         } 
       }
     }
