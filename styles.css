@@ -1,5 +1,5 @@
 .chat-client {
-  width: 30%;
+  width: 23%;
   height: 430px;
   border: 1px solid gray;
   border-radius: 2%;
@@ -85,6 +85,9 @@
 }
 
 .btn-open-chat {
-
-  
+  color: #fff;
+  background: blue;
+  border: none;
+  margin: 10px;
+  padding: 10px;
 }
