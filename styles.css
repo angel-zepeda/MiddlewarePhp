@@ -1,17 +1,16 @@
 .chat-client {
-  width: 23%;
-  height: 430px;
-  border: 1px solid gray;
-  border-radius: 2%;
+  width: 20%;
+  height: 300px;  
+  /* border-radius: 2%; */
   padding: 0;
-  box-shadow: 1px 1px 3px #888888;
+  /* box-shadow: 1px 1px 3px #888888; */
 }
 .chat-header {
   width: 100%;
   height: 40px;  
-  background: blue;
-  padding-top: 15px;
-  padding-bottom: 10px;
+  background: #3CB371;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #fff;
   text-align: center;
   border-radius: 2% 2% 0 0;
@@ -22,33 +21,36 @@
 }
 
 .chat-box {
-  width: 95%;
+  width: 100%;
   height: 74%;
-  background: #fff;
+  background: #eeeeee;
   padding: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   font-size: 0.9em;
+  border: none;
 }
 
 .input-chat {
-  width: 75%;
-  border-radius: 1%;
+  width: 74%;
+  border-radius: 30px 30px 30px 30px;
+  outline: none;
   font-size: 1em;
-  border: 1px solid gray;
-  padding: 10px;
-  font-size: 0.9em;
+  border: 0.9px solid #3cb371;
+  padding: 5px;
+  font-size: 10px;
   float: left;
 }
 
 .btn-send {
-  background: blue;
   width: 20%;
-  color: white;
+  color: #3CB371;
   font-size: 1em;
   border: none;
-  padding: 5px;
+  background: #fff;
   border-radius: 2px;
+  padding-bottom: 15px;
+  padding-left: 0;
 }
 
 .user-chat {
@@ -77,16 +79,17 @@
 .btn-close-chat {
   border-radius: 50%;
   color: #fff;
-  padding: 20px;
-  background: blue;
+  padding: 10px;
+  background: #3CB371;
   border: none;
   margin: 10px;
   font-size: 1.5em;
+  transform: translateY(75%);
 }
 
 .btn-open-chat {
   color: #fff;
-  background: blue;
+  background: #3CB371;
   border: none;
   margin: 10px;
   padding: 10px;

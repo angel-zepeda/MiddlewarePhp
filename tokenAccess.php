@@ -4,13 +4,8 @@
     use Google\Cloud\Dialogflow\V2\TextInput;
     use Google\Cloud\Dialogflow\V2\QueryInput;    
     require __DIR__.'/vendor/autoload.php';
-
-    $PROEJCT_ID = "chatbotbasico";
-    $QUERY = $_GET['query'];
-    $SESSION_ID =  uniqid();
-    
+    // $SESSION_ID = 12345;
     function detect_intent_texts($projectId, $text, $sessionId, $languageCode = 'es-ES') {
-        $respuesta = [];
         /* NEW CLIENT */
         try {
         $test = array('credentials' => './credentials/mainBot.json');
@@ -22,11 +17,11 @@
         $textInput = new TextInput();
         $textInput->setText($text);
         $textInput->setLanguageCode($languageCode);
- 
+
         /* CREATE QUERY INPUT */
         $queryInput = new QueryInput();
         $queryInput->setText($textInput);
- 
+
         /* GET RESPONSE */
         $response = $sessionsClient->detectIntent($session, $queryInput);
         $queryResult = $response->getQueryResult();
@@ -43,12 +38,16 @@
         // print(PHP_EOL);
         // printf('Fulfilment text: %s' . PHP_EOL, $fulfilmentText, $parameters);
         echo($fulfilmentText);
-
+        // echo "<script> console.log({$sessionId}) </script>";
         } catch(Exception $e) {
             echo 'Excepción capturada: ', $e->getMessage(), "\n";
         } finally {
             $sessionsClient->close();
         }
     }
-    detect_intent_texts($PROEJCT_ID, $QUERY, $SESSION_ID);
+    session_start();
+    $PROEJCT_ID = "chatbotbasico";
+    $INPUT = $_GET['query'];
+    $SESSION_ID =  $_GET['session'];
+    detect_intent_texts($PROEJCT_ID, $INPUT, $SESSION_ID);
 ?>

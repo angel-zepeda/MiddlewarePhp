@@ -1,7 +1,4 @@
-<?php
-  
-?>
-
+<?php?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -14,6 +11,8 @@
     <script crossorigin
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
       <link rel="stylesheet" href="./styles.css" />
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
@@ -22,58 +21,67 @@
 
     class App extends React.Component {
 
-      state = {
-        input: '',
-        initialState: '',
-        response: [],
-        // urlRoot: 'https://dialogflow.googleapis.com/v2',
-        // token: 'ya29.c.El9eB93y5hhJXMu8EqRvVmo-pAAyaKGznXrVqwit_-xCtpanHObsnqRz70khYTa403Le4EVoArtEEM1HSP8P_tFzji-5YZ-v7RSgTvap2OSqrfy6JBhEc_LpKwd5VCYxlA',
-        msg: [],
-        show: false,
-      }
-     
-      toggleChat = () => this.setState({ show: !this.state.show });
-      handleOnChange = e => this.setState({ [e.target.name]: e.target.value });
+        state = {
+            input: '',
+            initialState: '',
+            response: [],
+            // urlRoot: 'https://dialogflow.googleapis.com/v2',
+            // token: 'ya29.c.El9eB93y5hhJXMu8EqRvVmo-pAAyaKGznXrVqwit_-xCtpanHObsnqRz70khYTa403Le4EVoArtEEM1HSP8P_tFzji-5YZ-v7RSgTvap2OSqrfy6JBhEc_LpKwd5VCYxlA',
+            msg: [],
+            show: false,
+            session: Math.random()
+        }
 
-      handleOnSubmit = (e) => {
-        const { input } = this.state;
-        e.preventDefault();
-        this.replaceWhiteSpace(input);        
-      }
+        componentDidMount() {
+            sessionStorage.setItem('session', this.state.session);
+        }
+
+        toggleChat = () => this.setState({ show: !this.state.show });
+        handleOnChange = e => this.setState({ [e.target.name]: e.target.value });
+
+        handleOnSubmit = (e) => {
+            const { input } = this.state;
+            e.preventDefault();
+            this.replaceWhiteSpace(input);
+            this.setState({
+            input: this.state.initialState
+            })
+            
+        }
 
       replaceWhiteSpace = string => {
         const query = string.replace(/\s/g, "+");
-        this.getResponse(query);
+        
+        this.getResponse(query, string);
       }
 
-      getResponse = async query => {
+      getResponse = async (query, string) => {
         // const URL = `${this.state.urlRoot}/projects/${this.state.projectId}/agent/sessions/${this.state.sessionId}:detectIntent`;
         let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
-        let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}`);
+        let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}&session=${sessionStorage.getItem('session')}`);
         console.log(reponseReq);
         this.setState({ response: reponseReq.data })
         this.setState({ 
-            msg: [ ...this.state.msg, {user: this.state.input, bot: this.state.response} ], 
-            input: this.state.initialState
+            msg: [ ...this.state.msg, {user: string, bot: this.state.response} ]
         })
         let chat = document.querySelector('#chatBox');
         if (chat) chat.scrollTop = chat.scrollHeight;  
       }
 
-      render() {        
-        if (this.state.show) {          
+      render() {
+        if (this.state.show) {
           return (
             <div> 
                 <div className="chat-client">
                   <div className="chat-header"> 
-                    <p>CHAT BOT</p>
+                    <p>Chat</p>
                   </div>
                     <div className="chat-box" id="chatBox">
                     {this.state.msg.map(msg => (
                         <div key={msg.user}>
-                            <p className="user-chat">{msg.user}</p>       
+                            <p className="user-chat">{msg.user}</p>
                             <p className="bot-chat">{msg.bot}</p>
-                        </div>              
+                        </div>
                         ))}
                     </div>
                 <form onSubmit={this.handleOnSubmit}>
@@ -86,16 +94,17 @@
                     // autoFocus={true} 
                     placeholder="Escribe un mensaje..."
                     />
-                    <input 
-                    type="submit"
-                    value="Enviar"
-                    className="btn-send"
-                    />
+                    <button
+                      type="submit"
+                      className="btn-send"                      
+                    >
+                    <i class="material-icons">send</i>
+                    </button>
                 </form>
                 </div>
                 <input 
                     type="button"
-                    value="X"
+                    value="&times;"
                     className="btn-close-chat"
                     onClick={this.toggleChat}
                     />
