@@ -32,8 +32,17 @@
             session: Math.random()
         }
 
-        componentDidMount() {
-            sessionStorage.setItem('session', this.state.session);
+        getInitialMessage = async () => {
+          let start_message = "Hola";
+          let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
+          let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${start_message}&session=${sessionStorage.getItem('session')}`);
+          this.setState({ response: reponseReq.data });
+          this.setState({ msg: [ ...this.state.msg, {user: '', bot: this.state.response}] });
+        }
+
+        componentDidMount() { 
+          sessionStorage.setItem('session', this.state.session); 
+          this.getInitialMessage();
         }
 
         toggleChat = () => this.setState({ show: !this.state.show });
@@ -43,15 +52,11 @@
             const { input } = this.state;
             e.preventDefault();
             this.replaceWhiteSpace(input);
-            this.setState({
-            input: this.state.initialState
-            })
-            
+            this.setState({ input: this.state.initialState });
         }
 
       replaceWhiteSpace = string => {
         const query = string.replace(/\s/g, "+");
-        
         this.getResponse(query, string);
       }
 
@@ -59,13 +64,10 @@
         // const URL = `${this.state.urlRoot}/projects/${this.state.projectId}/agent/sessions/${this.state.sessionId}:detectIntent`;
         let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
         let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}&session=${sessionStorage.getItem('session')}`);
-        console.log(reponseReq);
-        this.setState({ response: reponseReq.data })
-        this.setState({ 
-            msg: [ ...this.state.msg, {user: string, bot: this.state.response} ]
-        })
+        this.setState({ response: reponseReq.data });
+        this.setState({ msg: [ ...this.state.msg, {user: string, bot: this.state.response}] });
         let chat = document.querySelector('#chatBox');
-        if (chat) chat.scrollTop = chat.scrollHeight;  
+        if (chat) chat.scrollTop = chat.scrollHeight;
       }
 
       render() {
@@ -79,7 +81,9 @@
                     <div className="chat-box" id="chatBox">
                     {this.state.msg.map(msg => (
                         <div key={msg.user}>
-                            <p className="user-chat">{msg.user}</p>
+                          {
+                            msg.user === '' ? null : <p className="user-chat">{msg.user}</p>
+                          }
                             <p className="bot-chat">{msg.bot}</p>
                         </div>
                         ))}
