@@ -24,9 +24,7 @@
         state = {
             input: '',
             initialState: '',
-            response: [],
-            // urlRoot: 'https://dialogflow.googleapis.com/v2',
-            // token: 'ya29.c.El9eB93y5hhJXMu8EqRvVmo-pAAyaKGznXrVqwit_-xCtpanHObsnqRz70khYTa403Le4EVoArtEEM1HSP8P_tFzji-5YZ-v7RSgTvap2OSqrfy6JBhEc_LpKwd5VCYxlA',
+            welcome: '',
             msg: [],
             show: false,
             session: Math.random()
@@ -36,8 +34,7 @@
           let start_message = "Hola";
           let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
           let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${start_message}&session=${sessionStorage.getItem('session')}`);
-          this.setState({ response: reponseReq.data });
-          this.setState({ msg: [ ...this.state.msg, {user: '', bot: this.state.response}] });
+          this.setState({ msg: [ ...this.state.msg, {user: '', bot: reponseReq.data }] });
         }
 
         componentDidMount() { 
@@ -61,11 +58,9 @@
       }
 
       getResponse = async (query, string) => {
-        // const URL = `${this.state.urlRoot}/projects/${this.state.projectId}/agent/sessions/${this.state.sessionId}:detectIntent`;
         let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
         let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}&session=${sessionStorage.getItem('session')}`);
-        this.setState({ response: reponseReq.data });
-        this.setState({ msg: [ ...this.state.msg, {user: string, bot: this.state.response}] });
+        this.setState({ msg: [ ...this.state.msg, {user: string, bot: reponseReq.data}] });
         let chat = document.querySelector('#chatBox');
         if (chat) chat.scrollTop = chat.scrollHeight;
       }
@@ -73,46 +68,48 @@
       render() {
         if (this.state.show) {
           return (
-            <div> 
+            <div>
                 <div className="chat-client">
                   <div className="chat-header"> 
                     <p>Chat</p>
                   </div>
                     <div className="chat-box" id="chatBox">
-                    {this.state.msg.map(msg => (
+                    {
+                      this.state.msg.map(msg => (
                         <div key={msg.user}>
-                          {
-                            msg.user === '' ? null : <p className="user-chat">{msg.user}</p>
-                          }
-                            <p className="bot-chat">{msg.bot}</p>
+                          { msg.user === '' ? null : <p className="user-chat">{msg.user}</p> }
+                          <p className="bot-chat">{msg.bot}</p>
                         </div>
-                        ))}
+                      ))
+                    }
                     </div>
-                <form onSubmit={this.handleOnSubmit}>
-                    <input 
-                    type="text"
-                    onChange={this.handleOnChange}
-                    value={this.state.input}
-                    name="input"
-                    className="input-chat"
-                    // autoFocus={true} 
-                    placeholder="Escribe un mensaje..."
-                    />
-                    <button
-                      type="submit"
-                      className="btn-send"                      
-                    >
-                    <i class="material-icons">send</i>
-                    </button>
-                </form>
-                </div>
-                <input 
-                    type="button"
-                    value="&times;"
-                    className="btn-close-chat"
-                    onClick={this.toggleChat}
-                    />
+                    <div className="chat-form">
+                      <form onSubmit={this.handleOnSubmit}>
+                          <input
+                          type="text"
+                          onChange={this.handleOnChange}
+                          value={this.state.input}
+                          name="input"
+                          className="input-chat"
+                          placeholder="Escribe un mensaje..."
+                          />
+                          <button
+                            type="submit"
+                            className="btn-send"
+                          >
+                          <i class="material-icons">send</i>
+                          </button>
+                      </form>
+                      </div>
+                      <input
+                          type="button"
+                          value="&times;"
+                          className="btn-close-chat"
+                          onClick={this.toggleChat}
+                      />
+                    </div>
             </div>
+
         )
         }else {
           return (
