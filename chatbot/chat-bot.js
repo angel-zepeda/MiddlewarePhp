@@ -24,9 +24,9 @@ $(function () {
         str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
         str += "          <span class=\"msg-avatar\">";
         if (type === 'bot') {
-            str += "            <img src=\"b_logo.png\">";
+            str += "            <img src=\"chatbot/b_logo.png\">";
         } else {
-            str += "            <img src=\"user-logo.png\">";
+            str += "            <img src=\"chatbot/user-logo.png\">";
         }
         str += "          <\/span>";
         str += "          <div class=\"cm-msg-text\">";
@@ -46,7 +46,7 @@ $(function () {
     function talkToDialogFlowApi(message) {
         $.ajax({
             type: "POST",
-            url: `http://localhost/MiddlewarePhp/tokenAccess.php?query=${message}&session=12344125`,
+            url: `chatbot/tokenAccess.php?query=${message}&session=12344125`,
             success: dialogFlowSuccessResponse,
             error: dialogFlowErrorResponse
         });

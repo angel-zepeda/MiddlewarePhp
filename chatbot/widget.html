@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="chatbot/chat-bot.css" />
+</head>
+
+<div id="chat-circle" class="btn btn-raised">
+    <div id="chat-overlay"></div>
+    <!-- <i class="material-icons">message</i> -->
+    <img src="chatbot/chat-icon.png" height="33px" />
+</div>
+
+<div class="chat-box">
+    <div class="chat-box-header">
+        <strong>Chat bot</strong>
+        <span class="chat-box-toggle">
+            <i class="material-icons" title="close" style="margin-top:-12px; font-size: 30px">minimize</i>
+        </span>
+        <span class="chat-header-refresh" id="refresh"><i class="material-icons" title="startover">refresh</i></span>
+    </div>
+    <div class="chat-box-body">
+        <div class="chat-box-overlay"></div>
+        <div class="chat-logs"></div>
+    </div>
+    <div id="loading" style="position: fixed;bottom: 55px;margin-top: 30px">
+        <img alt="loading" src="chat_loading.gif" />
+    </div>
+    <div class="chat-input">
+        <form id="chatBotForm">
+            <input type="text" id="chat-input" autofocus placeholder="Escribe tu duda aquí..." />
+            <button type="submit" class="chat-submit" id="chat-submit">
+                <span id="micSpan">
+                    <i class="material-icons">send</i>
+                </span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+<script src="chatbot/chat-bot.js"></script>
+</body>
+
+</html>
