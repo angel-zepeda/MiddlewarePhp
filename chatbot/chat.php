@@ -31,9 +31,10 @@
         }
 
         getInitialMessage = async () => {
+          console.log("HOla")
           let start_message = "Hola";
           let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
-          let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${start_message}&session=${sessionStorage.getItem('session')}`);
+          let reponseReq = await axios.get(`https://aspacei.net/MiddlewarePhp/tokenAccess.php?query=${start_message}&session=${sessionStorage.getItem('session')}`);
           this.setState({ msg: [ ...this.state.msg, {user: '', bot: reponseReq.data }] });
         }
 
@@ -59,7 +60,7 @@
 
       getResponse = async (query, string) => {
         let headers = { headers: { 'Authorization': 'Bearer ' + this.state.token, 'Content-Type': 'application/json' } }
-        let reponseReq = await axios.get(`http://localhost/MiddlewarePhp/tokenAccess.php?query=${query}&session=${sessionStorage.getItem('session')}`);
+        let reponseReq = await axios.get(`https://aspacei.net/MiddlewarePhp/tokenAccess.php?query=${query}&session=${sessionStorage.getItem('session')}`);
         this.setState({ msg: [ ...this.state.msg, {user: string, bot: reponseReq.data}] });
         let chat = document.querySelector('#chatBox');
         if (chat) chat.scrollTop = chat.scrollHeight;

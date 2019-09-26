@@ -1,9 +1,10 @@
 $(function () {
     var INDEX = 0;
     var recognition;
-    var uniqueSessionId;
-    var dialogflowUrl = "https://api.dialogflow.com/v1/";
-    var dialogflowAccessToken = "***********REPLACE**********";
+    // var uniqueSessionId;
+    // var dialogflowUrl = "https://api.dialogflow.com/v1/";
+    // var dialogflowAccessToken = "***********REPLACE**********";
+    sessionStorage.setItem('session_id', Math.random());
 
     var initializeSession = function () {
         $(".chat-logs").empty();
@@ -46,7 +47,7 @@ $(function () {
     function talkToDialogFlowApi(message) {
         $.ajax({
             type: "POST",
-            url: `chatbot/tokenAccess.php?query=${message}&session=12344125`,
+            url: `https://aspacei.net/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
             success: dialogFlowSuccessResponse,
             error: dialogFlowErrorResponse
         });
