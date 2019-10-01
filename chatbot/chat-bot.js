@@ -61,7 +61,7 @@ $(function () {
     function talkToDialogFlowApi(message) {
         $.ajax({
             type: "POST",
-            url: `http://aspacei.net/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
+            url: `https://aspacei.net/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
             success: dialogFlowSuccessResponse,
             error: dialogFlowErrorResponse
         });
