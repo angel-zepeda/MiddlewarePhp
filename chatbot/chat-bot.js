@@ -7,10 +7,11 @@ $(function () {
     sessionStorage.setItem('session_id', Math.random());
 
     var initializeSession = function () {
+
         $(".chat-logs").empty();
         uniqueSessionId = getUniqueChatSessionId();
         enableInput();
-        $("#loading").hide();
+        $("#loading").show();
         talkToDialogFlowApi("Hola");
 
     };
@@ -49,7 +50,7 @@ $(function () {
     function talkToDialogFlowApi(message) {
         $.ajax({
             type: "POST",
-            url: `https://aspacei.net/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
+            url: `http://aspacei.net/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
             success: dialogFlowSuccessResponse,
             error: dialogFlowErrorResponse
         });
