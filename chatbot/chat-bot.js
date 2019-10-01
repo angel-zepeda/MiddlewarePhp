@@ -11,6 +11,8 @@ $(function () {
         uniqueSessionId = getUniqueChatSessionId();
         enableInput();
         $("#loading").hide();
+        talkToDialogFlowApi("Hola");
+
     };
 
     function sendChatMessage(message) {
