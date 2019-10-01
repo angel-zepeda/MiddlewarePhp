@@ -19,7 +19,7 @@ $(function () {
         uniqueSessionId = getUniqueChatSessionId();
         enableInput();
         $("#loading").show();
-        if (window.location.includes("parque_detalle")) {
+        if (window.location.href.includes("parque_detalle")) {
             talkToDialogFlowApi($("#id_parques").val());
         } else {
             talkToDialogFlowApi("Hola");
