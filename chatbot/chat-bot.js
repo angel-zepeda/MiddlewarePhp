@@ -12,9 +12,8 @@ $(function () {
     //     return url.slice(20, url.length);
     // }
 
-
+    // NUEVO CAMBIO DE PRUEBA
     var initializeSession = function () {
-
         $(".chat-logs").empty();
         uniqueSessionId = getUniqueChatSessionId();
         enableInput();
@@ -24,7 +23,6 @@ $(function () {
         } else {
             talkToDialogFlowApi("Hola");
         }
-
     };
 
     function sendChatMessage(message) {
