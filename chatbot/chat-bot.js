@@ -5,6 +5,13 @@ $(function () {
     // var dialogflowUrl = "https://api.dialogflow.com/v1/";
     // var dialogflowAccessToken = "***********REPLACE**********";
     sessionStorage.setItem('session_id', Math.random());
+    // var URL = window.location.href;
+    // var URL = 'https://aspacei.net/dios padre'
+
+    // var getParqueinUrl = function (url) {
+    //     return url.slice(20, url.length);
+    // }
+
 
     var initializeSession = function () {
 
@@ -12,7 +19,11 @@ $(function () {
         uniqueSessionId = getUniqueChatSessionId();
         enableInput();
         $("#loading").show();
-        talkToDialogFlowApi("Hola");
+        if (window.location.includes("parque_detalle")) {
+            talkToDialogFlowApi($("#id_parques").val());
+        } else {
+            talkToDialogFlowApi("Hola");
+        }
 
     };
 
@@ -97,7 +108,7 @@ $(function () {
         $(".chat-box").toggle('scale');
         $(".chat-logs").stop().animate({
             scrollTop: $(".chat-logs")[0].scrollHeight
-        }, 1000);
+        }, 500);
     });
 
     $(".chat-box-toggle").click(function () {
