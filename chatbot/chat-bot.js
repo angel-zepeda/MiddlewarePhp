@@ -60,9 +60,10 @@ $(function () {
   // Hola soy ASPI! ¿Te gustaría conocer información del algún parque? Dime que parque te interesa
 
   function talkToDialogFlowApi(message) {
+    // let hostname = window.location.hostname;
     $.ajax({
       type: "POST",
-      url: `http://ixmi.mx/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
+      url: `https://aspacei.net/chatbot/chatbot/tokenAccess.php?query=${message}&session=${sessionStorage.getItem('session_id')}`,
       success: dialogFlowSuccessResponse,
       error: dialogFlowErrorResponse
     });
